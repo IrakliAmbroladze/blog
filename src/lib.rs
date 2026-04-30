@@ -1,11 +1,17 @@
 pub struct Post {
-    pub content: String,
+    state: Option<Box<dyn State>>,
+    content: String,
 }
 
 impl Post {
     pub fn new() -> Post {
         Post {
+            state: Some(Box::new(Draft {})),
             content: String::from(""),
         }
     }
 }
+
+trait State {}
+struct Draft {}
+impl State for Draft {}

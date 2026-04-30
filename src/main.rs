@@ -2,6 +2,12 @@ use blog::Post;
 
 fn main() {
     let mut post = Post::new();
-    post.content = String::from("hello");
-    println!("{0}", post.content);
+    post.add_text("I ate a salad for lunch today");
+    assert_eq!("", post.content);
+
+    post.request_review();
+    assert_eq!("", post.content);
+
+    post.approve();
+    assert_eq!("I ate a salad for lunch today", post.content);
 }
