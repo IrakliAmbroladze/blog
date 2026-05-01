@@ -13,9 +13,6 @@ impl Post {
     pub fn add_text(&mut self, text: &str) {
         self.content.push_str(text);
     }
-    pub fn content(&self) -> &str {
-        ""
-    }
 
     pub fn request_review(&mut self) {
         if let Some(s) = self.state.take() {
@@ -27,6 +24,10 @@ impl Post {
         if let Some(s) = self.state.take() {
             self.state = Some(s.approve())
         }
+    }
+
+    pub fn content(&self) -> &str {
+        self.state.as_ref().unwrap().content(self)
     }
 }
 
